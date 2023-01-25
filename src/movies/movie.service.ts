@@ -1,9 +1,17 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { handleConstrainUniqueError } from 'src/utils/handle-error-unique.util';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entity/movie.entity';
+
+const handleConstrainUniqueError = (error: Error): never => {
+  const splitedMessage = error.message.split('`');
+
+  const errorMessage = `Entrada '${
+    splitedMessage[splitedMessage.length - 2]
+  }' não está respeitando a constraint UNIQUE`;
+  throw new UnprocessableEntityException(errorMessage);
+};
 
 @Injectable()
 export class MoviesService {
