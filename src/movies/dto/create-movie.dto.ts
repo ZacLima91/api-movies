@@ -32,7 +32,6 @@ export class CreateMovieDto {
   })
   imgFullScreen: string;
 
-  @IsUrl()
   @ApiProperty({
     description: 'Link do trailer do filme',
     example: 'https://i.video.com/sgsdgsd',
