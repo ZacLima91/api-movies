@@ -16,11 +16,11 @@ const handleConstrainUniqueError = (error: Error): never => {
 
 @Injectable()
 export class UsersService {
+
   private userSelect = {
     id: true,
     name: true,
     email: true,
-    favorites: true,
     updatedAt: true,
     createdAt: true,
   };
@@ -67,7 +67,7 @@ export class UsersService {
     return this.verifyIdAndReturnUser(id);
   }
 
-  async getByEmail(email: string) {
+  async findByEmail(email: string) {
     return await this.prisma.user.findUnique({ where: { email } });
   }
 

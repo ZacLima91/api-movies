@@ -12,10 +12,16 @@ import { User } from './entity/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/updated-user.dto';
 import { UsersService } from './users.service';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Get('me')
+  getMe(@CurrentUser() user: User){
+    return user;
+  }
 
   @Post()
   @ApiOperation({
