@@ -2,17 +2,20 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as cors from 'cors'
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(new ValidationPipe());
-  app.use(cors({
-    origin:['http://example.com',"https://example.com", "http://localhost, https://api-movies-g3b3tyk6o-zaclima91.vercel.app/movies"],
-    allowedHeaders:['Content-Type, Accept', 'Authorization'],
-    
-  }));
+ 
+const corsOptions: CorsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+};
+
+app.enableCors(corsOptions)
 
   const config = new DocumentBuilder()
     .setTitle('API_FILMES')
