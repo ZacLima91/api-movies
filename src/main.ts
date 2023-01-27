@@ -9,8 +9,9 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   app.use(cors({
-    origin:['http://example.com',"https://example.com", "http://localhost"],
-    allowedHeaders:['Content-Type', 'Authorization']
+    origin:['http://example.com',"https://example.com", "http://localhost, https://api-movies-g3b3tyk6o-zaclima91.vercel.app/movies"],
+    allowedHeaders:['Content-Type, Accept', 'Authorization'],
+    
   }));
 
   const config = new DocumentBuilder()
