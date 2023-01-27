@@ -1,6 +1,18 @@
-import { Request } from 'express';
-import { User } from '../../user/entity/user.entity';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
+import { User } from 'src/user/entity/user.entity';
 
-export interface AuthRequest extends Request {
+export class UserLoginDto {
+
+  
+  @IsString()
+  @ApiProperty()
+  email: string;
+
+  @IsString()
+  @ApiProperty()
+  password: string;
+  id: string;
+  name: string;
   user: User;
 }

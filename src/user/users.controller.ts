@@ -6,22 +6,18 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { User } from './entity/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/updated-user.dto';
 import { UsersService } from './users.service';
-import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import { AuthGuard } from '@nestjs/passport';
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-  @Get('me')
-  getMe(@CurrentUser() user: User){
-    return user;
-  }
 
   @Post()
   @ApiOperation({
@@ -31,6 +27,8 @@ export class UsersController {
     return this.usersService.create(dto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Get()
   @ApiOperation({
     summary: 'Lista de todos usuários',
@@ -39,6 +37,8 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Get(':id')
   @ApiOperation({
     summary: 'Lista usuário por id',
@@ -47,6 +47,8 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Patch(':id')
   @ApiOperation({
     summary: 'Atualizar um usuário',
@@ -58,6 +60,8 @@ export class UsersController {
     return this.usersService.update(id, dto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Delete(':id')
   @ApiOperation({
     summary: 'Deletar usuário',

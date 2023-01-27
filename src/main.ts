@@ -15,7 +15,6 @@ async function bootstrap() {
     .setTitle('API_FILMES')
     .setDescription('API responsavel pela gestão de catalogo de filmes')
     .setVersion('1.0.0')
-    .addTag('auth')
     .addTag('users')
     .addTag('status')
     .addTag('movies')

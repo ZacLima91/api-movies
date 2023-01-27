@@ -6,17 +6,18 @@ import { User } from '../user/entity/user.entity';
 import { UsersService } from '../user/users.service';
 import { UserPayload } from './models/UserPayload';
 import { UserToken } from './models/UserToken';
+import { UserLoginDto } from './models/AuthRequest';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly userService: UsersService,
+    private readonly usersService: UsersService,
   ) {}
 
-  async login(user: User): Promise<UserToken> {
+  async login(user: UserLoginDto) {
     const payload: UserPayload = {
-      id: user.id,
+      sub: user.id,
       email: user.email,
       name: user.name,
     };
@@ -27,7 +28,7 @@ export class AuthService {
   }
 
   async validateUser(email: string, password: string): Promise<User> {
-    const user = await this.userService.findByEmail(email);
+    const user = await this.usersService.findByEmail(email);
 
     if (user) {
       const isPasswordValid = await bcrypt.compare(password, user.password);
