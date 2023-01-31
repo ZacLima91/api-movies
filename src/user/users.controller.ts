@@ -19,6 +19,9 @@ import { AuthGuard } from '@nestjs/passport';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Post()
   @ApiOperation({
     summary: 'Cria um novo usuário',
@@ -27,6 +30,8 @@ export class UsersController {
     return this.usersService.create(dto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Get()
   @ApiOperation({
     summary: 'Lista de todos usuários',

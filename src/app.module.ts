@@ -7,12 +7,12 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './user/users.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, MoviesModule],
+  imports: [PrismaModule, UsersModule,AuthModule, MoviesModule],
   providers: [
-    /*{
+    {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
-    },*/
+    },
   ],
 })
 export class AppModule {}
