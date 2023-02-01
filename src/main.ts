@@ -12,7 +12,6 @@ async function bootstrap() {
   });
   app.useGlobalPipes(new ValidationPipe());
 
-
   const config = new DocumentBuilder()
     .setTitle('API_FILMES')
     .setDescription('API responsavel pela gestão de catalogo de filmes')
