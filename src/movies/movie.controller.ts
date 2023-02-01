@@ -30,8 +30,7 @@ export class MovieController {
   create(@Body() dto: CreateMovieDto) {
     return this.moviesService.create(dto);
   }
-
-  @IsPublic()
+  
   @Get()
   @ApiOperation({
     summary: 'Listagem de filmes',
