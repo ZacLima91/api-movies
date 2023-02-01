@@ -19,7 +19,6 @@ import { AuthGuard } from '@nestjs/passport';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth()
   @Post()
@@ -58,7 +57,6 @@ export class UsersController {
   ): Promise<User | void> {
     return this.usersService.update(id, dto);
   }
-
 
   @Delete(':id')
   @ApiOperation({
