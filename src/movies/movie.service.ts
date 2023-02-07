@@ -43,7 +43,7 @@ export class MoviesService {
     return this.verifyIdAndReturnUser(id);
   }
 
-  async update(id: string, dto: UpdateMovieDto): Promise<Movie | void> {
+  async update(id: string, dto: UpdateMovieDto): Promise<Movie> {
     await this.verifyIdAndReturnUser(id);
     return this.prisma.movie
       .update({ where: { id }, data: dto })
