@@ -12,7 +12,10 @@ export class UserLoginDto {
   @IsString()
   @ApiProperty()
   password: string;
+
   id: string;
+
   name: string;
+  
   user: User;
 }
