@@ -19,17 +19,18 @@ export class UsersService {
 
   private userSelect = {
     id: true,
-    name: true,
+    userName: true,
     email: true,
+    img: true,
     updatedAt: true,
     createdAt: true,
   };
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(dto: CreateUserDto): Promise<User | void> {
+  async create(dto: CreateUserDto): Promise<User | undefined> {
     const hashedPassword = await bcrypt.hash(dto.password, 8);
     const data: CreateUserDto = {
-      name: dto.name,
+      userName: dto.userName,
       email: dto.email,
       img: dto.img,
       password: hashedPassword,
@@ -50,7 +51,8 @@ export class UsersService {
       where: { id },
       select: {
         id: true,
-        name: true,
+        userName: true,
+        img:true,
         email: true,
         createdAt: true,
         updatedAt: true,

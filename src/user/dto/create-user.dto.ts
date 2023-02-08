@@ -16,7 +16,7 @@ export class CreateUserDto {
     example: 'Zac',
     description: 'Nome do usuário a ser criado',
   })
-  name: string;
+  userName: string;
 
   @IsUrl()
   @ApiProperty({
