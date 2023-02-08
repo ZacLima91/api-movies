@@ -31,6 +31,7 @@ export class UsersService {
     const data: CreateUserDto = {
       name: dto.name,
       email: dto.email,
+      img: dto.img,
       password: hashedPassword,
     };
     return this.prisma.user

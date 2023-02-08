@@ -3,11 +3,13 @@ import {
   IsEmail,
   IsNotEmpty,
   IsString,
+  IsUrl,
   Matches,
   MinLength,
 } from 'class-validator';
 
 export class CreateUserDto {
+
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
@@ -15,12 +17,23 @@ export class CreateUserDto {
     description: 'Nome do usuário a ser criado',
   })
   name: string;
+
+  @IsUrl()
+  @ApiProperty({
+    example: 'zac.png',
+    description: 'Foto do usuário a ser criado',
+  })
+  img: string;
+
+
   @IsEmail()
   @ApiProperty({
     example: 'zac@mail.com',
     description: 'Email do usuário a ser criado',
   })
   email: string;
+
+
   @IsString()
   @MinLength(8)
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
