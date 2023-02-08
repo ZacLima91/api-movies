@@ -20,7 +20,7 @@ export class AuthService {
     const payload: UserPayload = {
       sub: user.id,
       email: user.email,
-      name: user.name,
+      userName: user.userName,
     };
 
     return {
@@ -31,9 +31,12 @@ export class AuthService {
 
   async validateUser(email: string, password: string): Promise<User> {
     const user = await this.usersService.findByEmail(email);
+    console.log(user)
+    console.log(password)
 
     if (user) {
       const isPasswordValid = await bcrypt.compare(password, user.password);
+      console.log(isPasswordValid)
 
       if (isPasswordValid) {
         return {
