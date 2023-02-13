@@ -39,6 +39,8 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Get(':id')
   @ApiOperation({
     summary: 'Lista usuário por id',
@@ -47,6 +49,8 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Patch(':id')
   @ApiOperation({
     summary: 'Atualizar um usuário',
@@ -58,6 +62,8 @@ export class UsersController {
     return this.usersService.update(id, dto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Delete(':id')
   @ApiOperation({
     summary: 'Deletar usuário',
