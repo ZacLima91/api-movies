@@ -31,6 +31,7 @@ export class MovieController {
     return this.moviesService.create(dto);
   }
   
+  @IsPublic()
   @Get()
   @ApiOperation({
     summary: 'Listagem de filmes',
@@ -39,8 +40,7 @@ export class MovieController {
     return this.moviesService.findAll();
   }
 
-  @UseGuards(AuthGuard('jwt'))
-  @ApiBearerAuth()
+  @IsPublic()
   @Get(':id')
   @ApiOperation({
     summary: 'Listagem de um filme',
