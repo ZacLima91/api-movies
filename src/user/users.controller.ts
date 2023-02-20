@@ -29,8 +29,7 @@ export class UsersController {
     return this.usersService.create(dto);
   }
 
-  @UseGuards(AuthGuard('jwt'))
-  @ApiBearerAuth()
+  @IsPublic()
   @Get()
   @ApiOperation({
     summary: 'Lista de todos usuários',
@@ -39,8 +38,7 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @UseGuards(AuthGuard('jwt'))
-  @ApiBearerAuth()
+  @IsPublic()
   @Get(':id')
   @ApiOperation({
     summary: 'Lista usuário por id',
